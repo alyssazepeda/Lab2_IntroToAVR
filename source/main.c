@@ -37,6 +37,9 @@ int main(void) {
 		if(weight > 0x8C) {
 			temp = 0x01;
 		}
+		else {
+			temp = 0x00;
+		}
 
 		//If cart difference exceeds 80kg, PD1=1
 		if(((A-C) > 0x50) || ((C-A) > 0x50)) {
@@ -44,6 +47,7 @@ int main(void) {
 		}
 
 		//assign MSB of weight and leave bits 0 & 1 for sensors
+		weight = weight >> 2;
 		temp = (weight & 0xFC) | temp;
 		PORTD = temp;
 
